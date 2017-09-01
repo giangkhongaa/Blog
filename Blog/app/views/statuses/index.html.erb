@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Xin chào tới Blog Giang</h1>
+    <% @statuses.each do |status| %>
+        <h2><%= link_to status.title, status %></h2>
+        <%= time_ago_in_words status.created_at %>
+        <p>
+          <%= truncate status.post %>         
+        </p>
+    <% end %>
+<br>
+
+<%= link_to 'New Status', new_status_path %>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<h1>Thông tin chi tiết</h1>
+<p>
+  <strong>Title:</strong>
+  <%= @status.title %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @status.post %>
+</p>
+
+<h2>Bình luận</h2>
+	<% @status.comments.each do |comment| %>
+        <p><%= comment.text %></p>
+        <p><%= time_ago_in_words comment.created_at %> trước </p>
+        <p>
+          <%= link_to 'Xóa bình luận', [@status, comment], :method => :delete, :confirm => 'Chắc chắn bạn muốn xóa!'%> 
+        </p>
+  <% end %>
+<p>
+
+<%= form_for [@status, @status.comments.build] do |form|%>
+	 <p><%= form.text_area :text, :size => '50x10' %></p>
+	 <%= form.submit "Đăng bình luận"%>
+<% end %>
+
+<%= link_to 'Thay đổi', edit_status_path(@status) %> 
+|
+<%= link_to 'Trở về', statuses_path %>
+|
+<%= link_to 'Xóa', @status, :method => :delete, :confirm => "Bạn có muốn xóa không ?" %>
+</p>
